@@ -1,0 +1,208 @@
+{% extends 'base.html' %} {% load static %} 
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+
+{% block css %}
+    <style>
+        .input-group-text{display:none;}
+        #id_image{position:absolute;top:-9999px;left:-9999px;}
+        .form-control.d-flex.h-auto{position:absolute;top:-9999px;left:-9999px;}
+    </style>
+{% endblock %}
+
+
+
+{% block content %} 
+
+    {% load crispy_forms_tags %}
+    
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            
+            <div class="container-fluid">
+                
+                <h3 class="text-dark mb-4">
+                    Perfil
+                </h3>
+                
+                <div class="card shadow mb-3">
+                    <div class="card-header py-3">
+                        <p class="text-dark m-0 fw-bold">
+                            Configuración de usuario
+                        </p>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Start: Form -->
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="row" style="margin-bottom: 25px;text-align: left;">
+                                <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 col-xxl-2" style="display: inline;text-align: center;margin-bottom: 25px;">
+
+                                    <!-- Image Display -->
+                                    {% if form.image.value != '' %}
+                                        <img id="img-preview" class="rounded-circle mb-3 mt-4 img-fluid" src="/media/{{form.image.value}}" style="display: inline;max-height: 110px;">
+                                        <p id="noImageText" style="display:none"><br><br>Imagen removida</p>
+                                    {% else %}
+                                        <img id="img-preview" class="rounded-circle mb-3 mt-4 img-fluid" src="/media/{{form.image.value}}" style="display: none;max-height: 110px;">
+                                        <p id="noImageText"><br><br>Sin imagen<br></p>
+                                    {% endif %}
+
+                                    <!-- We are hiding this image inputs with a position absolute style that
+                                    renders them outside the screen -->
+                                    {{form.image|as_crispy_field}}<br>
+                                                                            
+                                    <button id="photoBtn" class="btn btn-primary btn-sm mt-1 btn_guinda" type="button">
+                                        Cambiar {% if form.image.value == '' %}Foto{% endif %}
+                                    </button>
+                                    
+                                    {% if form.image.value != '' %}
+                                        <!-- The clear button will only render when we have a Profile Image -->
+                                        <button id="clearImage" class="btn btn-danger btn-sm mt-1 btn_verde" type="button">
+                                            Remover
+                                        </button>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 col-xxl-10 align-self-center">
+                                    <div class="row">
+                                        <div class="col-md-12 text-start">
+                                            {{form.email|as_crispy_field}}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+
+                                <!-- Start: Error Messages -->
+                                <div class="col" id="errorMessagesDiv">
+                                    <p id="emailErrorMsg" class="text-danger" style="display:none;"></p>
+                                    
+                                </div>
+                                
+                                <div class="col-md-12" style="text-align: right;margin-top: 5px;">
+                                    <button class="btn btn-primary btn-sm btn_guinda" id="submitBtn" type="submit">
+                                        Guardar cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End: Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="https://geodata.solutions/includes/countrystate.js"></script>
+    <script>
+        let email = document.getElementById("email")
+        let submitBtn = document.getElementById("submitBtn")
+        let emailErrorMsg = document.getElementById('emailErrorMsg')
+
+        let imagePreview = document.getElementById('img-preview')
+        let originalImage = imagePreview.src
+        let originalImageSplitCount = originalImage.split("/").length
+        let imageInput = document.getElementById('id_image')
+        let noImageText = document.getElementById("noImageText")
+        let clearImageButton = document.getElementById("clearImage")
+        let clearImageCheckBox = document.getElementById("image-clear_id")
+        let divIdImage = document.getElementById("div_id_image");
+        divIdImage.style.position = "absolute";
+
+        let imageErrorMsg = $('#error_1_id_image')
+        if(imageErrorMsg) {
+            imageErrorMsg.appendTo("#errorMessagesDiv");
+            imageErrorMsg.addClass("text-danger").removeClass("invalid-feedback");
+        }
+
+        // FUNCTIONS 
+
+        function displayErrorMsg(type, msg) {
+            if(type == "email") {
+                emailErrorMsg.style.display = "block"
+                emailErrorMsg.innerHTML = msg
+                submitBtn.disabled = true
+            }
+
+        }
+
+        function hideErrorMsg(type) {
+            if(type == "email") {
+                emailErrorMsg.style.display = "none"
+                emailErrorMsg.innerHTML = ""
+                submitBtn.disabled = true
+
+            }
+
+        }
+        
+    
+
+        // Validate email upon change
+        email.addEventListener("change", function() {
+            // Check if the email is valid using a regular expression (string@string.string)
+            if(email.value.match(/^[^@]+@[^@]+\.[^@]+$/)){
+                hideErrorMsg("email")
+            }
+            else {
+                displayErrorMsg("email", "Correo electrónico invalido");
+            }
+        });
+
+
+        // Open Image Selection Upon Button Click
+        document.getElementById("photoBtn").addEventListener("click", function() {
+            $("#id_image").click();
+        });
+
+        // Clear Image Script
+        if(clearImageButton) {
+            clearImageButton.addEventListener("click", function() {
+                clearImageCheckBox.checked = true;
+                clearImageButton.disabled = true
+                noImageText.style.display = "block"
+                imagePreview.style.display = "none"
+                imageInput.value = ""
+            });
+        }
+        
+        // Render Image Upon Change (Jquery) Script
+        imageInput.addEventListener("change", function() {
+            if(this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+
+                    noImageText.style.display = "none"
+                    imagePreview.style.display = "inline";
+                    $('#img-preview').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(this.files[0]);
+                imageErrorMsg.hide();
+                
+                if(clearImageCheckBox) {
+                    clearImageCheckBox.checked = false;
+                    clearImageButton.disabled = false
+                }
+            }
+            else {
+                imagePreview.style.display = "none"
+                noImageText.style.display = "block"
+                
+                if(clearImageCheckBox) {
+                    clearImageCheckBox.checked = true;
+                    clearImageButton.disabled = true
+                }
+            }
+        });
+    </script>
+{% endblock %}

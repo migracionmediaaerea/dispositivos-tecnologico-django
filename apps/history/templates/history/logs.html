@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Índice de
+    Inventario
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
+{% endblock %}
+{% block content %}
+<!-- Start: IndexParent -->
+
+<h2>Activity Log Viewer</h2>
+<div class="row row-cols-2 g-2 g-lg-3" style="margin-left: 1vw;margin-right: 1vw;">
+    <div class="col">
+        <div class="card border-primary">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <h3 style="padding: 1vw;font-weight: bold;">
+                        <i class="fa fa-user"></i>
+                        &nbsp;Users
+                    </h3>
+                </h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laborum dolor saepe numquam fugit quisquam provident distinctio aspernatur neque, sint minus nemo, maiores rem libero, vel itaque voluptatem perferendis obcaecati.</p>
+                <a class="btn btn-primary" href="{% url 'history:users' %}">Users History »</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

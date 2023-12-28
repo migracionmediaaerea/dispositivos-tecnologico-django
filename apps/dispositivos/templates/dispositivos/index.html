@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title %}
+    Dispositivos tecnológicos
+{% endblock %}
+
+
+
+{% block css %}{% endblock %}
+
+
+
+{% block content %}
+<div id="wrapper" class="mb-4">
+    <div class="d-flex flex-column" style='width:100%'>
+        <div id="content">
+    
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    {% if perms.catalogos_modular.view_candados_index %}
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-top: 1vh;">
+                        <a href="{% url 'dispositivos:candados' %}"
+                            style="text-decoration: none;border-color: var(--bs-red);color: var(--bs-gray);">
+                            <div class="card catalogos_cards wrap-text" style="box-shadow: 2px 2px 5px;" tabindex="0">
+                                <div class="card-body align-card-text ">
+                                    <h4 class="text-center card-title align-card-text-child" style="pointer-events: none;">
+                                        Candados
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if perms.gafetes_modular.view_gafetes_index %}
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-top: 1vh;">
+                        <a href="{% url 'dispositivos:gafetes'  %}"
+                            style="text-decoration: none;border-color: var(--bs-red);color: var(--bs-gray);">
+                            <div class="card catalogos_cards wrap-text" style="box-shadow: 2px 2px 5px;" tabindex="0">
+                                <div class="card-body align-card-text ">
+                                    <h4 class="text-center card-title align-card-text-child" style="pointer-events: none;">
+                                        Gafetes
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% if perms.catalogos_modular.view_tags_index %}
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-top: 1vh;">
+                        <a href="{% url 'dispositivos:lotes' %}"
+                            style="text-decoration: none;border-color: var(--bs-red);color: var(--bs-gray);">
+                            <div class="card catalogos_cards wrap-text" style="box-shadow: 2px 2px 5px;" tabindex="0">
+                                <div class="card-body align-card-text">
+                                    <h4 class="text-center card-title align-card-text-child align-card-text-child" style="pointer-events: none;">
+                                        Lotes
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" style="margin-top: 1vh;">
+                        <a href="{% url 'dispositivos:tags' %}"
+                            style="text-decoration: none;border-color: var(--bs-red);color: var(--bs-gray);">
+                            <div class="card catalogos_cards wrap-text" style="box-shadow: 2px 2px 5px;" tabindex="0">
+                                <div class="card-body align-card-text">
+                                    <h4 class="text-center card-title align-card-text-child align-card-text-child" style="pointer-events: none;">
+                                        Tags
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}{% endblock %}

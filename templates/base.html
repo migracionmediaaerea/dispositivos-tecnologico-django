@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"> -->
+
+        <!-- Favicon and title -->
+        <link rel="icon" type="image/x-icon" href="/static/assets/img/logoheader.svg">
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+
+        <!-- Styles -->
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+        <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}">
+
+        {% comment %} <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css"> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static 'assets/css/styles1.min.css' %}"> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static 'assets/catalogos/css/styles.min.css' %}"> {% endcomment %}
+
+        <style>
+            .redColor{
+                color:#691C32 ;
+            }
+    
+            .btn-primary, .btn-primary:active, .btn-primary:disabled, .btn-primary:focus{
+                background-color:#691C32 ;
+                border:0 ;
+            }
+    
+            .btn-primary:hover{
+                background-color:#5b182b ;
+            }
+
+
+    
+            .btn-danger, .btn-danger:focus{
+                background-color:#235b23 ;
+                border:0 ;
+            }
+    
+            .btn-danger:hover{
+                background-color:#205420 ;
+            }
+            
+            .redColor{
+                color:#691C32 !important;
+            }
+
+            @media (max-width: 767px) {
+                .mobile_logo {
+                    padding: 0rem !important;
+                    padding-left : 0.5rem !important;
+                }
+            }
+
+            @media (max-width: 378px) {
+                .text-puesto {
+                    font-size: 13px;
+                }
+
+
+            }
+
+            nav.toggled > div > a{
+                padding: 0rem !important;
+                padding-left : 0.5rem !important;
+            }
+            
+            
+        </style>
+        {% block css %}{% endblock %}
+
+
+        
+    </head>
+
+    <body id="page-top">
+
+        <!-- HTML goes inside this -->
+        <div id="wrapper">
+            
+            <!-- Left Navbar -->
+            <nav class="navbar navbar-light align-items-start sidebar bg-white sidebar-dark accordion p-0 ">
+                <div class="container-fluid d-flex flex-column p-0">
+
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand mt-3 mb-4 p-4 mobile_logo" href="{% url 'dispositivos:index' %}">
+                        <div class="sidebar-brand-icon">
+                            <div class="row">
+                                <div>
+                                    <img class="img-fluid" src="{% static 'assets/img/logo_centrado.png' %}">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </a>
+
+                    <hr class="sidebar-divider my-0">
+                    <hr class="sidebar-divider my-0">
+
+                    <!-- Sidebar Options -->
+                    <ul class="navbar-nav text-light" id="accordionSidebar">
+
+                        {% if perms.catalogos_modular.view_tags_index or perms.catalogos_modular.view_candados_index or perms.gafetes_modular.view_gafetes_index %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.resolver_match.app_name == 'dispositivos' %} active {% endif %}" href={% url "dispositivos:index" %}>
+                                    <i class="fas fa-chart-bar redColor" ></i>
+                                    <span class="redColor">Dispositivos tecnológicos</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% comment %} {% if perms.digitalizacion_modular.view_pesoarchivo%}
+                        <li class="nav-item">
+                            <a href="{% url 'pesoarchivos:index' %}" class="nav-link
+                                {% if request.resolver_match.app_name == 'pesoarchivos' %} active {% endif %}">
+                                
+                                <i class="fas fa-file redColor"></i>
+                                <span class="redColor"> Peso de archivos</span>
+                            </a>
+                        </li>
+                        {% endif %} {% endcomment %}
+
+                        {% comment %} {% if request.user.is_superuser %}
+
+                        <li class="nav-item">
+                            <a href="{% url 'registerAdmin' %}" class="nav-link
+                                ">
+                                
+                                <i class="fas fa-user"></i>
+                                <span>Registrar usuario</span>
+                            </a>
+                        </li>
+                        {% endif %} {% endcomment %}
+
+                    </ul>
+
+                    <div class="text-center d-none d-md-inline">
+                        <button class="btn rounded-circle border-0 " id="sidebarToggle" style="background-color:#691C32" type="button"></button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Right Content -->
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+
+                   <!-- Top Navbar -->
+                   <nav class="navbar navbar-light navbar-expand mb-4 shadow topbar static-top" style="background:#10312B">
+                    <div class="container-fluid">
+                        <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+
+
+                            {% comment %} <li class="nav-item dropdown no-arrow mx-1 text-puesto">
+                                <p style="margin-top: 13px; color:#fff;">
+                                    <strong>Puesto</strong>
+
+                                    : {{request.user.cargo|default_if_none:"Sin puesto"}}
+
+                                    <br>
+
+                                    <strong>Area</strong>
+
+                                    : {{request.user.area|default_if_none:"Sin area"}}
+                                </p>
+                            </li> {% endcomment %}
+
+                            <div class="d-none d-sm-block topbar-divider"></div>
+
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
+                                        href="#">
+                                        <span class="d-none d-lg-inline me-2 text-light fw-bold small">{{ request.user.username }}</span>
+
+                                        <img class="border rounded-circle img-profile"
+                                            src="{% if request.user.image.url is not None %} {{request.user.image.url}} {% else %} /media/profiles/generic/blank-profile-pic.png{% endif %}">
+                                    </a>
+
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% if request.user.id is not None %}{% url 'profile' %}{%endif%}">
+                                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Perfil
+                                        </a>
+                                        {% endif %}
+                                        <div class="dropdown-divider"></div>
+
+                                        <form action="{% url 'logout' %}" style="display:inline;" method="post">
+                                            {% csrf_token %}
+                                            <button class="dropdown-item"  type="submit"> 
+                                                  <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                                                  &nbsp;Cerrar sesión
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                    <!-- Individual Page Content -->
+                    <div class="container-fluid">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+
+
+                <!-- Footer -->
+                <footer class="bg-white sticky-footer footer_color">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto copyright">
+                            <span>Copyright © ANAM {% now "Y" %}</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+
+            <a class="border rounded d-inline scroll-to-top" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+        </div>
+
+        <!-- General Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="{% static 'assets/js/script1.min.js' %}"></script>
+        
+
+        <!-- Page level plugins -->
+        {% block js %}{% endblock %}
+        
+        {% comment %} 
+        <script src="{% static 'assets/js/script.min.js' %}"></script>
+        <script src="{% static 'assets/js/script.min.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script src="{% static 'assets/catalogos/js/script.min.js' %}"></script> {% endcomment %}
+        
+        <!-- Nav bar fuctions -->
+        {% comment %} <script src="{% static 'assets/js/script1.min.js' %}"></script> {% endcomment %}
+        
+        {% comment %} <script src="{% static 'assets/js/validations.js' %}"></script> {% endcomment %}
+        <!-- Table sorter -->
+        <!-- Table sorter -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    </body>
+</html>

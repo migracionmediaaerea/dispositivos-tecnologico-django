@@ -1,0 +1,3 @@
+[submodule "comun"]
+	path = comun
+	url = https://github.com/mediaerea/anam-modelos.git

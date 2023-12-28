@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title %}
+    Usted no tiene pérmisos en este sitio
+{% endblock %}
+
+
+
+{% block css %}
+{% endblock %}
+
+
+
+{% block content %} 
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-4 col-md-6 col-lg-4 col-xl-4">
+            <div class="card text-center">
+                <img src="{% static 'assets/img/logo_centrado.png' %}" class="card-img-top img-fluid" alt="hacienda">
+                <div class="card-body">
+                <h5 class="card-title">Prohibido</h5>
+                <p class="card-text">Usted no tiene permiso para acceder a esta página, si cree que esto es un error, por favor contacte con algún administrador.</p>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+
+{% endblock %}

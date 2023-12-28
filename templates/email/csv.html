@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"> -->
+    <title>Email</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' > 
+	<link rel="preconnect" href="https://fonts.googleapis.com" > <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin > <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet" > 
+</head>
+
+<body style="margin: 0; padding: 0;">
+	<table role="presentation" style="width:100%; border-collapse: collapse; border:0; border-spacing:0; background: #ffffff;">
+		<tr>
+			<td align="center" style="padding:0;">
+				<table role="presentation" style="width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;">
+					<tr>						
+						<td align="center" style="padding:50px 0 30px 0;background: white; width: 250px;">
+							<a ><img src="https://ludensproductions.com/clients/anam/avc_responsiva/logo_centrado.png" style="height:auto;display:block;box-shadow: black;" width="260" alt="ADUANAS" border="0"></a>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding:36px 30px 42px 30px;">
+							<table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;">
+								<tr>
+                                    <!-- <div id="regis_res" class="d-flex flex-row align-items-center top-alert fixed-top" style="background: #a11943;margin-bottom: 20px;font-weight: 400;height: 32px;"></div> -->
+									<td id="containerFontSize" style="padding:0 0 10px 0;color:#153643;font-size: 1.2em;">
+										<div style="background-color: #153643; color: white; padding:7px 0 7px 20px; margin-bottom: 5px; border-radius: 5px;">
+                                            Estimad@ <b>{{ nombre }}</b><br>
+										</div>
+										<br>
+										Se adjunta el archivo {{formato}} para la solicitud de la infomación de {{modelo}} {{fecha|safe}}. <br>
+										Favor de no compartirlo con nadie. <br>
+										<br>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding:30px;background:#691C32;">
+							<table role="presentation" style="width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;">
+								<div id="requisitos" style="font-size: 1.5em;color: white;">
+									Es importante que no comparta este archivo con nadie.
+									<br>
+								</div>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+
+
+</html>

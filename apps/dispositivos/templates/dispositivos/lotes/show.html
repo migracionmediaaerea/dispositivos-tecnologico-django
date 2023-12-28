@@ -1,0 +1,149 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block title %}Detalle del lote{% endblock %}
+
+
+{% block css %}
+    
+{% endblock css %}
+
+    {% comment %} <title>Show</title> {% endcomment %}
+
+{% block content %}
+
+        <div id="content">
+            
+            
+            <!-- Content Section -->
+                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-12" style="margin-bottom: 25px;padding-left: 5%;font-size: 3vmin;margin-top: 0px;">
+                        <a class="anone" href={% url "dispositivos:index" %}>
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                            <span>&nbsp;Volver</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mb-4">
+                    <div class="col-sm-12 col-lg-8" style="margin-right: 10px;margin-left: 10px;">
+                        <div class="card" style="border-top:3px #691C32 solid;" >
+                            <div class="card-header" style="border-bottom:3px #691C32 solid;">
+                                <h5 class="my-3 mb-2 text-start fw-bold" style="color:#691C32;">Lote: {{ lote.lote }}</h5>
+                            </div>
+                            <div class="card-body text-center">
+              
+                                <hr style="background-color:#691C32;">
+                                
+                                <div class="row">
+
+                                    <div class="col-sm-12 col-md-6 text-end">
+                                        <label class="fw-bold mb-0">Nombre de usuario</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <p class="text-start mb-0">{{lote.created_by.username}}</p>
+                                    </div>
+
+                                    <div class="mb-2"></div>
+
+                                    <div class="col-sm-12 col-md-6 text-end">
+                                        <label class="fw-bold mb-0">Nombre completo</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <p class="text-start mb-0">{{lote.created_by.first_name}} {{lote.created_by.last_name}} {{lote.created_by.second_last_name|default:""}}</p>
+                                    </div>
+
+                                    <div class="mb-2"></div>
+
+                                    <div class="col-sm-12 col-md-6 text-end">
+                                        <label class="fw-bold mb-0">CURP</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <p class="text-start mb-0">{{lote.created_by.curp}}</p>
+                                    </div>
+
+                                    <div class="mb-2"></div>
+
+                                    <div class="col-sm-12 col-md-6 text-end">
+                                        <label class="fw-bold mb-0">RFC</label>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <p class="text-start mb-0">{{lote.created_by.rfc}}</p>
+                                    </div>
+
+                                    <div class="mb-2"></div>
+
+                                </div>
+
+                                    <hr style="background-color:#691C32;">
+
+                                    <div class="row mt-3">
+                                        <div class="col-sm-12 col-md-6">
+                                            <h3 style="color:#691C32;"><strong>Número inicial</strong></h3>
+
+                                            {% for numero_inicial in rango.numero_inicial %}
+                                            
+                                                <p class="text mb-0">{{numero_inicial}}</p>
+
+                                            {% endfor %}
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <h3 style="color:#691C32;"><strong>Número final</strong></h3>
+
+                                            {% for numero_final in rango.numero_final %}
+                                                                                    
+                                                <p class="text mb-0">{{ numero_final }}</p>
+                                                
+                                            {% endfor %}
+
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                
+            <!-- End of content Section -->
+        </div>
+
+        
+
+   
+{% endblock content %}
+    
+{% block js %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                let title = "";
+                if("{{message.tags}}" === 'error'){
+                    title = "¡Error!";
+                }
+                if ('{{message.tags}}' === 'success'){
+                    title = "Éxito!";
+                }
+                if ("{{message.tags}}" === 'warning'){
+                    title = "Advertencia!";
+                }
+                if ("{{message.tags}}" === 'info'){
+                    title = "Información";
+                }
+
+                Swal.fire({
+                    title: title,
+                    text: '{{message}}',
+                    type: '{{message.tags}}',
+                    icon: '{{message.tags}}',
+                    confirmButtonText: 'OK'
+                });
+
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endblock js %}
